@@ -1,0 +1,44 @@
+CC=gcc
+
+CFLAGS=-c -Wall -Wextra -Werror
+
+rebild: clean all
+
+strlen_tests: s21_string.c s21_string_test.c 
+	$(CC) -D strlen_tests -o ../build/Quest_1 s21_string.c s21_string_test.c
+
+strcmp_tests: s21_string.c s21_string_test.c
+	$(CC) -D strcmp_tests -o ../build/Quest_2 s21_string.c s21_string_test.c
+
+strcpy_tests: s21_string_test.c s21_string.c 
+	$(CC) -D strcpy_tests -o ../build/Quest_3 s21_string.c s21_string_test.c
+
+strcat_tests: s21_string.c s21_string_test.c 
+	$(CC) -D strcat_tests -o ../build/Quest_4 s21_string.c s21_string_test.c
+
+strchr_tests: s21_string.c s21_string_test.c
+	$(CC) -D strchr_tests -o ../build/Quest_5 s21_string.c s21_string_test.c
+
+strstr_tests: s21_string_test.c s21_string.c 
+	$(CC) -D strstr_tests -o ../build/Quest_6 s21_string.c s21_string_test.c
+
+strtok_tests: s21_string_test.c s21_string.c 
+	$(CC) -D strtok_tests -o ../build/Quest_7 s21_string.c s21_string_test.c
+
+
+text_processor: text_processor.c s21_string.c 
+	$(CC) -o ../build/Quest_8 text_processor.c s21_string.c
+
+check:
+	cppcheck --enable=all --suppress=missingIncludeSystem *.c
+	python3 ../materials/linters/cpplint.py --extensions=c *.c
+clean:
+	rm -rf *.o
+	rm -f ../build/Quest_1
+	rm -f ../build/Quest_2
+	rm -f ../build/Quest_3
+	rm -f ../build/Quest_4
+	rm -f ../build/Quest_5
+	rm -f ../build/Quest_6
+	rm -f ../build/Quest_7
+	rm -f ../build/Quest_8
